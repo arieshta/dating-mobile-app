@@ -1,11 +1,13 @@
 package premium
 
-// import "github.com/arieshta/dating-mobile-app/handler/auth"
+import (
+	"github.com/arieshta/dating-mobile-app/handler/auth"
+	"github.com/arieshta/dating-mobile-app/model"
+)
 
-// func RegisterPremiumRoutes(h *model.SharedHolder) {
-// 	controller := NewController(h)
+func RegisterPremiumRoutes(h *model.SharedHolder) {
+	controller := NewController(h)
 
-// 	matchesGroup := h.Echo.Group("/premium")
-// 	matchesGroup.Use(auth.Auth)
-// 	matchesGroup.POST("/purchase", controller.Purchase)
-// }
+	matchesGroup := h.Echo.Group("/premium", auth.Auth)
+	matchesGroup.POST("/purchases", controller.Purchase)
+}

@@ -3,7 +3,6 @@ package users
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/arieshta/dating-mobile-app/model"
 	"github.com/arieshta/dating-mobile-app/model/dto"
@@ -19,6 +18,8 @@ type (
 		GetByEmail(email string) (*model.User, error)
 		GetRandomOneWithFilter(filter dto.GetRandomFilter) (*model.User, error)
 		Create(user *model.User) (*model.User, error)
+		Update(userId string, payload *dto.UpdateBody) (*model.User, error)
+		Delete(userId string) error
 	}
 
 	Repo struct {
@@ -40,7 +41,6 @@ func (r *Repo) GetByUserId(userId string) (user *model.User, err error) {
 }
 
 func (r *Repo) GetByUsername(username string) (user *model.User, err error) {
-	fmt.Println(username)
 	err = r.mongoCollection.FindOne(context.Background(), bson.M{"username": username}).Decode(&user)
 	if err != nil {
 		return nil, err
@@ -92,6 +92,22 @@ func (r *Repo) Create(user *model.User) (*model.User, error) {
 		return nil, errors.New("failed to convert InsertedID to ObjectID")
 	}
 	return user, nil
+}
+
+func (r *Repo) Update(userId string, payload *dto.UpdateBody) (user *model.User, err error) {
+	err = r.mongoCollection.FindOneAndUpdate(context.Background(), bson.M{"_id": userId}, bson.M{"$set": payload}).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (r *Repo) Delete(userId string) error {
+	_, err := r.mongoCollection.DeleteOne(context.Background(), bson.M{"_id": userId})
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func NewRepository(holder *model.SharedHolder) (Repository, error) {

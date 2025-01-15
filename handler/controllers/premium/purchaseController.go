@@ -1,14 +1,25 @@
 package premium
 
-// import "github.com/labstack/echo/v4"
+import (
+	"net/http"
 
-// func (c *Controller) Purchase(ec echo.Context) error {
-// 	likes, err := c.premiumService.Purchase(ec.Get("userid").(string))
-// 	if err != nil {
-// 		if err == mongo.ErrNoDocuments {
-// 			return ec.JSON(http.StatusNotFound, "No likes found")
-// 		}
-// 		return ec.JSON(http.StatusBadRequest, err.Error())
-// 	}
-// 	return ec.JSON(http.StatusOK, likes)
-// }
+	"github.com/arieshta/dating-mobile-app/model/dto"
+	"github.com/labstack/echo/v4"
+)
+
+func (c *Controller) Purchase(ec echo.Context) error {
+	var (
+		payload = dto.PurchaseBody{}
+	)
+
+	if err := ec.Bind(&payload); err != nil {
+		return ec.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	premium, err := c.premiumService.Purchase(ec.Get("userid").(string), &payload)
+	if err != nil {
+		return ec.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	return ec.JSON(http.StatusOK, premium)
+}

@@ -33,9 +33,11 @@ func (s *ServiceImpl) GetNewOneFeedService(userId string) (*model.Feed, error) {
 		return nil, err
 	}
 
-	dailyLimit := 10
-	if len(feed.Feeds) >= dailyLimit {
-		return nil, fmt.Errorf("daily limit reached")
+	if (s.premiumService.HasPremium(userId)) {
+		dailyLimit := 10
+		if len(feed.Feeds) >= dailyLimit {
+			return nil, fmt.Errorf("daily limit reached")
+		}
 	}
 	var genderFilter string
 	if user.Gender == "male" {

@@ -6,11 +6,13 @@ import (
 
 	"github.com/arieshta/dating-mobile-app/model"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type (
 	Repository interface {
+		CreateOne(premium *model.Premium) (*model.Premium, error)
 		GetByUserId(userId string) (*model.Premium, error)
 		UpdateOne(userId string, premium bool) (*model.Premium)
 	}
@@ -35,6 +37,19 @@ func (r *Repo) UpdateOne(userId string, premium bool) (prem *model.Premium) {
 		return nil
 	}
 	return prem
+}
+
+func (r *Repo) CreateOne(premium *model.Premium) (prem *model.Premium, err error) {
+	res, err := r.mongoCollection.InsertOne(context.Background(), premium)
+	if err != nil {
+		return nil, err
+	}
+	if oid, ok := res.InsertedID.(primitive.ObjectID); ok {
+		premium.ID = oid
+	} else {
+		return nil, errors.New("failed to convert InsertedID to ObjectID")
+	}
+	return premium, nil
 }
 
 func NewRepository(holder *model.SharedHolder) (Repository, error) {

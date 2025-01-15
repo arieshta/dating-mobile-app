@@ -1,6 +1,8 @@
 package dto
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type (
 	SignUpBody struct {
@@ -15,6 +17,12 @@ type (
 	LoginBody struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
+	}
+
+	UpdateBody struct {
+		Fullname string `json:"fullname"`
+		Gender   string `json:"gender"`
+		Picture  string `json:"picture"`
 	}
 
 	Profile struct {

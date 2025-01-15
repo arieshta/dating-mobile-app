@@ -4,6 +4,7 @@ import (
 	"github.com/arieshta/dating-mobile-app/internal/repositories/feeds"
 	"github.com/arieshta/dating-mobile-app/internal/repositories/likes"
 	"github.com/arieshta/dating-mobile-app/internal/repositories/users"
+	"github.com/arieshta/dating-mobile-app/internal/services/premium"
 	"github.com/arieshta/dating-mobile-app/model"
 )
 
@@ -20,6 +21,7 @@ type (
 		feedRepo     feeds.Repository
 		likeRepo     likes.Repository
 		userRepo     users.Repository
+		premiumService premium.Service
 	}
 )
 
@@ -36,5 +38,9 @@ func NewService(sharedHolder *model.SharedHolder) (*ServiceImpl, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &ServiceImpl{sharedHolder, feedRepo, likeRepo, userRepo}, nil
+	premiumService, err := premium.NewService(sharedHolder)
+	if err != nil {
+		return nil, err
+	}
+	return &ServiceImpl{sharedHolder, feedRepo, likeRepo, userRepo, premiumService}, nil
 }

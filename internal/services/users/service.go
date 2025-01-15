@@ -8,8 +8,11 @@ import (
 
 type (
 	Service interface {
+		GetOneByUserIdService(userId string) (*model.User, error)
 		LoginService(payload *dto.LoginBody) (string, error)
 		SignUpService(payload *dto.SignUpBody) (*model.User, error)
+		UpdateService(userId string, payload *dto.UpdateBody) (*model.User, error)
+		DeleteService(userId string) error
 	}
 
 	ServiceImpl struct {
