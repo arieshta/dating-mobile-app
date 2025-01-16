@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type (
@@ -95,7 +96,13 @@ func (r *Repo) Create(user *model.User) (*model.User, error) {
 }
 
 func (r *Repo) Update(userId string, payload *dto.UpdateBody) (user *model.User, err error) {
-	err = r.mongoCollection.FindOneAndUpdate(context.Background(), bson.M{"_id": userId}, bson.M{"$set": payload}).Decode(&user)
+	oid, err := primitive.ObjectIDFromHex(userId)
+	if err != nil {
+		return nil, errors.New("failed to convert userId to ObjectID")
+	}
+	opts := options.FindOneAndUpdateOptions{}
+	opts.SetReturnDocument(options.After)
+	err = r.mongoCollection.FindOneAndUpdate(context.Background(), bson.M{"_id": oid}, bson.M{"$set": payload}, &opts).Decode(&user)
 	if err != nil {
 		return nil, err
 	}

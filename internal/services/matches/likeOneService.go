@@ -2,6 +2,7 @@ package matches
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/arieshta/dating-mobile-app/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -32,6 +33,9 @@ func (s *ServiceImpl) LikeOneService(userId, matchId string) (*model.Likes, erro
 	newLikeId, err := primitive.ObjectIDFromHex(matchId)
 	if err != nil {
 		return nil, err
+	}
+	if slices.Contains(likes.LikeIDs, newLikeId) {
+		return likes, nil
 	}
 	likes = s.likeRepo.UpdateOne(bson.M{"_id": likes.ID}, bson.M{"$push": bson.M{"like_ids": newLikeId}})
 	return likes, nil

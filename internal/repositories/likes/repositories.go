@@ -3,12 +3,12 @@ package likes
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/arieshta/dating-mobile-app/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type (
@@ -26,7 +26,6 @@ type (
 
 func (r *Repo) GetAllByUserId(userId string) (likes *model.Likes, err error) {
 	err = r.mongoCollection.FindOne(context.Background(), bson.M{"user_id": userId}).Decode(&likes)
-	fmt.Println("===",err, mongo.ErrNoDocuments)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +54,9 @@ func (r *Repo) Create(likes *model.Likes) (*model.Likes, error) {
 }
 
 func (r *Repo) UpdateOne(filter, update bson.M) (likes *model.Likes) {
-	err := r.mongoCollection.FindOneAndUpdate(context.Background(), filter, update).Decode(&likes)
+	opts := options.FindOneAndUpdateOptions{}
+	opts.SetReturnDocument(options.After)
+	err := r.mongoCollection.FindOneAndUpdate(context.Background(), filter, update, &opts).Decode(&likes)
 	if err != nil {
 		return nil
 	}

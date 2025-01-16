@@ -23,5 +23,4 @@ func (c *Controller) Login(ec echo.Context) error {
 	ec.Set("token", token)
 	ec.Response().Writer.Header().Set("Authorization", token)
 	return ec.JSON(http.StatusOK, "Success")
-	// return ec.String(http.StatusOK, token)
 }

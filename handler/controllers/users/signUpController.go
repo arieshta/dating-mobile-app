@@ -18,5 +18,5 @@ func (c *Controller) SignUp(ec echo.Context) error {
 	if err != nil {
 		return ec.JSON(http.StatusBadRequest, err.Error())
 	}
-	return ec.JSON(http.StatusOK, user)
+	return ec.JSON(http.StatusOK, user.ToProfile())
 }

@@ -24,7 +24,11 @@ type (
 )
 
 func (r *Repo) GetByUserId(userId string) (premium *model.Premium, err error) {
-	err = r.mongoCollection.FindOne(context.Background(), bson.M{"user_id": userId}).Decode(&premium)
+	userIdObj, err := primitive.ObjectIDFromHex(userId)
+	if err != nil {
+		return nil, err
+	}
+	err = r.mongoCollection.FindOne(context.Background(), bson.M{"user_id": userIdObj}).Decode(&premium)
 	if err != nil {
 		return nil, err
 	}

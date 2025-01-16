@@ -3,12 +3,12 @@ package feeds
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/arieshta/dating-mobile-app/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type (
@@ -25,8 +25,11 @@ type (
 )
 
 func (r *Repo) GetByUserId(userId string) (feed *model.Feed, err error) {
-	fmt.Println(userId)
-	err = r.mongoCollection.FindOne(context.Background(), bson.M{"user_id": userId}).Decode(&feed)
+	userIdObj, err := primitive.ObjectIDFromHex(userId)
+	if err != nil {
+		return nil, errors.New("failed to convert userId to ObjectID")	
+	}
+	err = r.mongoCollection.FindOne(context.Background(), bson.M{"user_id": userIdObj}).Decode(&feed)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +37,9 @@ func (r *Repo) GetByUserId(userId string) (feed *model.Feed, err error) {
 }
 
 func (r *Repo) UpdateOne(filter bson.M, update bson.M) (feed *model.Feed) {
-	err := r.mongoCollection.FindOneAndUpdate(context.Background(), filter, update).Decode(&feed)
+	opts := options.FindOneAndUpdateOptions{}
+	opts.SetReturnDocument(options.After)
+	err := r.mongoCollection.FindOneAndUpdate(context.Background(), filter, update, &opts).Decode(&feed)
 	if err != nil {
 		return nil
 	}

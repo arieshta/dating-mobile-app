@@ -12,5 +12,6 @@ func RegisterMatchesRoutes(h *model.SharedHolder) {
 	matchesGroup.Use(auth.Auth)
 	matchesGroup.GET("/likes", controller.GetLikes)
 	matchesGroup.POST("/likes", controller.LikeOne)
+	matchesGroup.POST("/pass", controller.PassOne)
 	matchesGroup.GET("/new", controller.GetNewOne)
 }

@@ -14,6 +14,7 @@ type (
 		GetLikesService(userId string) (*model.Likes, error)
 		GetNewOneFeedService(userId string) (*model.Feed, error)
 		LikeOneService(userId, matchId string) (*model.Likes, error)
+		PassOneService(userId, matchId string) (*model.Feed, error)
 	}
 
 	ServiceImpl struct {
