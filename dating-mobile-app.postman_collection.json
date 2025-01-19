@@ -1,0 +1,1137 @@
+{
+	"info": {
+		"_postman_id": "68e12930-af0b-4a34-9d1f-fb80ffb43747",
+		"name": "dating-mobile-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18157169"
+	},
+	"item": [
+		{
+			"name": "Signup (success)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response doesn't have password field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.password).to.not.exist;",
+							"});",
+							"pm.environment.set(\"username\", pm.request.body.username);",
+							"pm.environment.set(\"password\", pm.request.body.password);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": {{username}},\n    \"password\": {{password}},\n    \"email\": \"usertest@m.co\",\n    \"fullname\": \"user test\",\n    \"gender\": \"male\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostdocker}}/users/signup",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup (failed - email used)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response message is 'email already exists'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('email already exists');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user-test2\",\n    \"password\": \"pass\",\n    \"email\": \"usertest@m.co\",\n    \"fullname\": \"user test2\",\n    \"gender\": \"male\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostdocker}}/users/signup",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup (failed - username used)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response message is 'email already exists'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('user already exists');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user-test\",\n    \"password\": \"pass\",\n    \"email\": \"usertest2@m.co\",\n    \"fullname\": \"user test2\",\n    \"gender\": \"male\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostdocker}}/users/signup",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login (failed - username not exist)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response message is 'wrong email or password'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('wrong email or password');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostdocker}}/users/login",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login (failed - wrong password)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response message is 'wrong email or password'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('wrong email or password');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": {{username}},\n    \"password\": \"pass1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostdocker}}/users/login",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login (success)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response message is 'Success'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('Success');",
+							"});",
+							"pm.environment.set(\"Authorization\",pm.response.headers.get(\"Authorization\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/users/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile (failed - not requester profile)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Response message is 'Unauthorized'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('Unauthorized');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{hostdocker}}/users/67882c786a318f89046afabf",
+					"host": [
+						"{{hostdocker}}"
+					],
+					"path": [
+						"users",
+						"67882c786a318f89046afabf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile (success)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Return profile JSON with updated fullname\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.fullname).to.eql(pm.environment.get('updatedFullname'));",
+							"});",
+							"pm.test(\"Return profile JSON with updated picture link\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.picture).to.eql(pm.environment.get('updatedPicturelink'));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"{{updatedFullname}}\",\n    \"picture\": \"{{updatedPicturelink}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/users/67882c786a318f89046afabe",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"67882c786a318f89046afabe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile (success - non premium)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Return profile JSON with requested userid\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.request.url.getPath().split('/')[2]);",
+							"});",
+							"pm.test(\"Return profile JSON with verified = false\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.verified).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/users/67882c786a318f89046afabe",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"67882c786a318f89046afabe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile (success - premium)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Return profile JSON with requested userid\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.request.url.getPath().split('/')[2]);",
+							"});",
+							"pm.test(\"Return profile JSON with verified = false\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.verified).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/users/67882110f24f5852c6bc052a",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"67882110f24f5852c6bc052a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New Feed (success)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - id, user_id, and feeds\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.exist;",
+							"    pm.expect(responseData.user_id).to.exist;",
+							"    pm.expect(responseData.feeds).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id and user_id are non-empty strings\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"  pm.expect(responseData.user_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"User_id should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds is an array with at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Count the number of array feeds and save it to an environment variable\", function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.feeds).to.be.an('array');",
+							"    pm.environment.set(\"firstFeedCount\", responseData.feeds.length);",
+							"});",
+							"",
+							"pm.environment.set('userIdtoLike', pm.response.json.feeds[0])"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New Feed Again (success)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - id, user_id, and feeds\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.exist;",
+							"    pm.expect(responseData.user_id).to.exist;",
+							"    pm.expect(responseData.feeds).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id and user_id are non-empty strings\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"  pm.expect(responseData.user_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"User_id should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds is an array with at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds count should greater than previous feeds count\", function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.greaterThan(pm.environment.get(\"firstFeedCount\"));",
+							"});",
+							"",
+							"pm.environment.set('userIdtoPass', pm.response.json.feeds[1])"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"new"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get New Feed (no user found)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/matches/new",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matches",
+								"new"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Jan 2025 08:27:12 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						}
+					],
+					"cookie": [],
+					"body": "\"no user found\""
+				}
+			]
+		},
+		{
+			"name": "Get New Feed Again (success - premium - more than 10 feeds)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - id, user_id, and feeds\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.exist;",
+							"    pm.expect(responseData.user_id).to.exist;",
+							"    pm.expect(responseData.feeds).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id and user_id are non-empty strings\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should not be empty\");",
+							"  pm.expect(responseData.user_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"User_id should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds is an array with at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds count should be more than 10\", function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.greaterThan(10);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New Feed Again (failed - no user found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response message is 'no user found'\", function () {",
+							"     pm.expect(pm.response.text()).to.include('no user found');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Match",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response schema is valid and contains required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.property('id');",
+							"    pm.expect(responseData).to.have.property('user_id');",
+							"    pm.expect(responseData).to.have.property('like_ids');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should be a non-empty string\");",
+							"});",
+							"",
+							"pm.test(\"User_id should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.user_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"User_id should be a non-empty string\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Like_ids is an array and not empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.like_ids).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Like_ids array should not be empty\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/likes?matchid={{userIdtoLike}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"likes"
+					],
+					"query": [
+						{
+							"key": "matchid",
+							"value": "{{userIdtoLike}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pass Match",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response schema is valid and contains required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.property('id');",
+							"    pm.expect(responseData).to.have.property('user_id');",
+							"    pm.expect(responseData).to.have.property('feeds');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Id should be a non-empty string\");",
+							"});",
+							"",
+							"pm.test(\"User_id should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.user_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"User_id should be a non-empty string\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Feeds is an array and not empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.feeds).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Feeds array should not be empty\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/pass?matchid={{userIdtoPass}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"pass"
+					],
+					"query": [
+						{
+							"key": "matchid",
+							"value": "{{userIdtoPass}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Likes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - id, user_id, and like_ids\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.exist;",
+							"    pm.expect(responseData.user_id).to.exist;",
+							"    pm.expect(responseData.like_ids).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id and user_id are in a valid format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.be.a('string');",
+							"    pm.expect(responseData.user_id).to.be.a('string');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Like_ids is an array and not empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.like_ids).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Like_ids array should not be empty\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/matches/likes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"matches",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.id).to.exist;",
+							"  pm.expect(responseData.username).to.exist;",
+							"  pm.expect(responseData.fullname).to.exist;",
+							"  pm.expect(responseData.gender).to.exist;",
+							"  pm.expect(responseData.picture).to.exist;",
+							"  pm.expect(responseData.verified).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate user response properties\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    ",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"ID should be a non-empty string\");",
+							"    ",
+							"    pm.expect(responseData.username).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Username should be a non-empty string\");",
+							"    ",
+							"    pm.expect(responseData.fullname).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Fullname should be a non-empty string\");",
+							"    ",
+							"    pm.expect(responseData.gender).to.be.a('string').and.to.satisfy(function (value) {",
+							"        return value === 'male' || value === 'female' || value === 'other';",
+							"    }, \"Gender should be a valid gender value\");",
+							"    ",
+							"    pm.expect(responseData.verified).to.be.a('boolean', \"Verified should be a boolean value\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/users/{{userIdtoLike}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"{{userIdtoLike}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

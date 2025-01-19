@@ -1,5 +1,8 @@
 const users = [
   {
+    _id: {
+      oid: '67882c786a318f89046afabe'
+    },
     username: 'arieshta',
     password: 'arieshta',
     email: 'arieshta@gmail.com',
@@ -8,6 +11,9 @@ const users = [
     picture: 'https://avatars.githubusercontent.com/u/16465521?v=4'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afac1'
+    },
     username: 'nisa',
     password: 'nisa',
     email: 'nisa@gmail.com',
@@ -16,6 +22,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/12.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afac4'
+    },
     username: 'user3',
     password: 'user3',
     email: 'user3@gmail.com',
@@ -24,6 +33,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/22.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afac7'
+    },
     username: 'user4',
     password: 'user4',
     email: 'user4@gmail.com',
@@ -32,6 +44,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/32.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afaca'
+    },
     username: 'user5',
     password: 'user5',
     email: 'user5@gmail.com',
@@ -40,6 +55,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/45.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afacd'
+    },
     username: 'user6',
     password: 'user6',
     email: 'user6@gmail.com',
@@ -48,6 +66,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/67.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afad0'
+    },
     username: 'user7',
     password: 'user7',
     email: 'user7@gmail.com',
@@ -56,6 +77,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/54.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afad3'
+    },
     username: 'user8',
     password: 'user8',
     email: 'user8@gmail.com',
@@ -64,6 +88,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/72.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afad6'
+    },
     username: 'user9',
     password: 'user9',
     email: 'user9@gmail.com',
@@ -72,6 +99,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/95.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afad9'
+    },
     username: 'user10',
     password: 'user10',
     email: 'user10@gmail.com',
@@ -80,6 +110,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/98.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afadc'
+    },
     username: 'user11',
     password: 'user11',
     email: 'user11@gmail.com',
@@ -88,6 +121,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/63.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afadf'
+    },
     username: 'user12',
     password: 'user12',
     email: 'user12@gmail.com',
@@ -96,6 +132,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/89.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afae2'
+    },
     username: 'user13',
     password: 'user13',
     email: 'user13@gmail.com',
@@ -104,6 +143,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/men/36.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afae5'
+    },
     username: 'user14',
     password: 'user14',
     email: 'user14@gmail.com',
@@ -112,6 +154,9 @@ const users = [
     picture: 'https://randomuser.me/api/portraits/women/75.jpg'
   },
   {
+    _id: {
+      oid: '67882c786a318f89046afae8'
+    },
     username: 'user15',
     password: 'user15',
     email: 'user15@gmail.com',
@@ -123,19 +168,34 @@ const users = [
 
 const premium = [
   {
-    user_id: '1',
+    _id: {
+      oid: '67882c786a318f89046afae9'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afabe'
+    },
     duration: 30,
     purchased_at: new Date(),
     purchase_number: 1
   },
   {
-    user_id: '2',
+    _id: {
+      oid: '67882c786a318f89046afaeb'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac1'
+    },
     duration: 60,
     purchased_at: new Date(),
     purchase_number: 2
   },
   {
-    user_id: '3',
+    _id: {
+      oid: '67882c786a318f89046afaec'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac4'
+    },
     duration: 6,
     purchased_at: new Date(),
     purchase_number: 2
@@ -144,72 +204,259 @@ const premium = [
 
 const likes = [
   {
-    user_id: '1',
-    like_ids: ['2', '3', '4', '5', '6', '7']
+    _id: {
+      oid: '67882c786a318f89046afaed'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afabe'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '2',
-    like_ids: ['1', '3', '4', '5', '6', '7']
+    _id: {
+      oid: '67882c786a318f89046afaf0'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac1'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '3',
-    like_ids: ['1', '2', '4', '5', '6', '7']
+    _id: {
+      oid: '67882c786a318f89046afaf3'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac4'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '4',
-    like_ids: ['1', '2', '3', '5', '6', '7']
+    _id: {
+      oid: '67882c786a318f89046afaf6'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac7'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '5',
-    like_ids: ['1', '2', '3', '4', '6', '7']
+    _id: {
+      oid: '67882c786a318f89046afaf9'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afaca'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '6',
-    like_ids: ['1', '2', '3', '4', '5', '7']
+    _id: {
+      oid: '67882c786a318f89046afafc'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afacd'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afad0'
+      }
+    ]
   },
   {
-    user_id: '7',
-    like_ids: ['1', '2', '3', '4', '5', '6']
+    _id: {
+      oid: '67882c786a318f89046afb01'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afad0'
+    },
+    like_ids: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      },
+      {
+        oid: '67882c786a318f89046afaca'
+      },
+      {
+        oid: '67882c786a318f89046afacd'
+      }
+    ]
   }
 ]
 
-const feed = [
+const feeds = [
   {
-    user_id: '1',
-    feeds: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+    _id: {
+      oid: '67882c786a318f89046afb06'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afabe'
+    },
+    feeds: [
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      }
+    ]
   },
   {
-    user_id: '2',
-    feeds: ['1', '3']
+    _id: {
+      oid: '67882c786a318f89046afb09'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac1'
+    },
+    feeds: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac4'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      }
+    ]
   },
   {
-    user_id: '3',
-    feeds: ['1', '2', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-  },
-  {
-    user_id: '4',
-    feeds: ['1', '5', '6', '7', '8', '9', '10', '11', '12']
-  },
-  {
-    user_id: '5',
-    feeds: ['4', '3']
-  },
-  {
-    user_id: '6',
-    feeds: ['1', '2', '3', '4', '5', '7', '8', '9', '10', '11', '12']
-  },
-  {
-    user_id: '7',
-    feeds: ['2', '5']
+    _id: {
+      oid: '67882c786a318f89046afb0c'
+    },
+    user_id: {
+      oid: '67882c786a318f89046afac4'
+    },
+    feeds: [
+      {
+        oid: '67882c786a318f89046afabe'
+      },
+      {
+        oid: '67882c786a318f89046afac1'
+      },
+      {
+        oid: '67882c786a318f89046afac7'
+      }
+    ]
   }
-]
-
-db = db.getSiblingDB('dating_app')
-db.createCollection('users')
-db.createCollection('premium')
-db.createCollection('likes')
-db.createCollection('feed')
-db.users.insertMany(users)
-db.premium.insertMany(premium)
-db.likes.insertMany(likes)
-db.feed.insertMany(feed)
+];
