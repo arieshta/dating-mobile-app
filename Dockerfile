@@ -1,4 +1,4 @@
-FROM golang:alpine as build-env
+FROM golang:alpine AS build-env
 
 RUN apk update && apk add --no-cache gcc musl-dev
 

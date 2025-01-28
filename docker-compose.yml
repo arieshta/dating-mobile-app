@@ -5,7 +5,7 @@ services:
     container_name: db-mongo
     volumes:
       - data:/data/db
-      - ./seed/seed.js:/docker-entrypoint-initdb.d/seed.js:ro
+      - ./seed/seed.js:/docker-entrypoint-initdb.d/seed.js
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
     ports:
       - "27017:27017"
